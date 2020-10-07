@@ -22,11 +22,13 @@ My data was downloaded from the website [The Blue Alliance  (TBA)](https://www.t
 ### Data Cleaning
 For the event data, the csv file each row reported on the result of a match. 
 
-![**FIGURE 1:** Data From The Blue Alliance Event Format](images/dataFromTBA.png)
+<img align="center" style="padding-right:10px;" src="images/dataFromTBA.png" width=550><br>
+
+![**FIGURE 1: Data From The Blue Alliance Event Format](images/dataFromTBA.png)
 
 For my analysis I need the data to be organized by Team. 
 
-![**FIGURE 2:** Team Data Format](images/dataTransformation.png) 
+![**FIGURE 2: Team Data Format](images/dataTransformation.png) 
 
 For each row of data from TBA 6 rows of data had to be created and a win flag needed to be set so I could identify who won each match.  I also had to parse the year,regional,match column into separate year, regionals, round, and match columns. For clarity I gave each round a more descriptive identifier('Final', 'QtrF', 'Qual', 'SemiF’).
 ### Data Exploration
@@ -40,7 +42,7 @@ The plot in Figure 3 illistrates the effect of there is a new game each year. Th
 
 When you look at FIGURE 4 the data for each year is comparable and we can treat it and one data set. I also looked at the mean  score with the Standard deviation.  I calculated the mean score for each year and I also separated it in to the round that was being played. 
 
-![FIGURE 5: Game Statistics](image/gameStats.png) 
+![FIGURE 5: Game Statistics](images/gameStats.png) 
 
 This is important to understand since as the matches go from qualifying to finals the mean score is different and the mean increase for each round.  For a team this is important to set expectations as team go into the final round and will be selecting partner teams. 
 
@@ -51,7 +53,7 @@ In Figures 6 through 9 we see the data distribution by round for all of the stan
 ### Are Awards important?
 A common discussion with teams is:  Are the award important?  When looking at the scatterplot 
 
-![Figure 10: Award Plot](image/awardsScatterPlot.png)  
+![Figure 10: Award Plot](images/awardsScatterPlot.png)  
 
 I have graphed the number of matches won verse the number of awards won.  You can see that teams that have won more matches are those teams that have also won more awards.  Remember that this is only for the four-year period of data being analyzed. This may not be a feature for selecting a team to join your alliance. I do think it does indicate teams that have well established processes and are consistent performers.  I did include a table that has a random sample of record to further demonstrate the results.
 
@@ -75,7 +77,7 @@ To create the logic for the recommender I extracted the data for the 2019 Oklaho
 
 You can visually determine what score will have a certain probability of win. For instance, if you are seeking a 60% probability of winning you will need a score of 50 or greater. 
 
-![FIGURE 14: Team Scores W/Error Bars](image/teamScores.png)
+![FIGURE 14: Team Scores W/Error Bars](images/teamScores.png)
 
 The mean score for a team is the average score achieve in match play and error bars show the range of scores the team had.  This is important for final team selections. In my assumption I said that better team will aggregate a higher score.  But because the scores are actually the result of three teams working together it is important to look at this chart.  The error bars are an indicator of how the other alliance teams affected the scores. If the error bars are large, this indicates that the team was not necessarily the strongest team on the alliance and other team actually had more effect on the overall performance of the alliance. 
 ### Creating the Recommendation  
