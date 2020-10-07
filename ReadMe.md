@@ -22,7 +22,6 @@ My data was downloaded from the website [The Blue Alliance  (TBA)](https://www.t
 ### Data Cleaning
 For the event data, the csv file each row reported on the result of a match. 
 
-<img align="center" style="padding-right:10px;" src="images/dataFromTBA.png" width=550><br>
 
 ![**FIGURE 1: Data From The Blue Alliance Event Format](images/dataFromTBA.png)
 
@@ -48,7 +47,7 @@ This is important to understand since as the matches go from qualifying to final
 
 ![FIGURE 6: Qualifying Rounds Distribution-Standardized](images/distributionQualification.png)![FIGURE 7: Quarter Final Rounds Distribution-Standardized](images/distributionQuaterFinals.png) ![FIGURE 8: Semi-final Rounds Distribution-Standardized](images/distributionSemiFinals.png) ![FIGURE 9: Final Rounds Distribution-Standardized](images/distributionFinals.png)
 
-In Figures 6 through 9 we see the data distribution by round for all of the standardized data I have outline the mean value (0) with a read box so it was easier to identify on the figures.  For all of the chart there data has a normal distribution. This is important so that we can use analysis techniques that assume a normal (gaussian) distribution and not have to account for it.  Another thing I noticed is the barker green data.  This is actually the overlap of the wins and loose data.  This is an indication of score that could be achieved and either win or loose the match.  As the scores move from qualify through the final rounds you can notice that there is a change in shape. The over lap in qualifying is broad and tall indication that there are more possible ambiguous scores In the final round the overlap is narrower and it is also skewed to the right.  Even though the scores are higher it still does not guarantee a win.
+In Figures 6 through 9 we see the data distribution by round for all of the standardized data   For all of the chart there data has a normal distribution. This is important so that we can use analysis techniques that assume a normal (gaussian) distribution and not have to account for it.  Another thing I noticed is the darker green data.  This is actually the overlap of the wins and loose data.  This is an indication of score that could be achieved and either win or loose the match.  As the scores move from qualify through the final rounds you can notice that there is a change in shape. The over lap in qualifying is broad and tall indication that there are more possible ambiguous scores In the final round the overlap is narrower and it is also skewed to the right.  Even though the scores are higher it still does not guarantee a win.
 
 ### Are Awards important?
 A common discussion with teams is:  Are the award important?  When looking at the scatterplot 
@@ -65,11 +64,11 @@ There is one more step of preparation that need to be performed so that a model 
 
 ![FIGURE 12: Data Preparation](images/dataPrep1.png)
 
-I used 'year','score_std','regional_numcode','g_rnd_numcode’ as feature in the logistical regression to determine the probability of win and probability of loss. 
+I used 'year','score_std','regional_numcode','g_rnd_numcode’ as features in the logistical regression to determine the probability of win and probability of loss. 
 
 ![Figure 12: Data Preparation Results](images/dataPrep2.png) 
 
-This also sets the weights and bias of the model so that new data can be run through the model to calculate the probability of win and loose for the regional data, the new data does not change the weights and biases.
+This also sets the weights and bias of the model so that new data can be run through the model to calculate the probability of win and loss for the regional data, the new data does not change the weights and biases.
 ### Recommender Creation  
 To create the logic for the recommender I extracted the data for the 2019 Oklahoma City regional.  I also extracted only the qualifying rounds so to emulate the data the team would have available to them for decision making.  The first step what to get the data configured into the correct format and run it through our model to assign the probability of win and loss to each match.  In this figure we see a comparison of the probability to win and the match scores non-standardized). 
 
@@ -85,16 +84,24 @@ The recommendation is built with two loop passes.  The first pass, the subject t
 
 ![FIGURE 15: Sample Recommendations](images/recomenderOutput.png)  
 
-Figure 15 is a sample of the list that is generated.  Here you see that the three teams that are a suggested alliance and the mean score and probability to win for those teams.  With is information and what we know about matches, the final round score is always higher, we can start looking at the team that have a mean score that is closer to the max qualifying round scores.  Combine this with the scouting information that was collected at the regional event, and other information that the team feel makes for a good alliance partner, a final choice can be made.  
+Figure 15 is a sample of the list that is generated.  Here you see that the three teams that are a suggested alliance and the mean score and probability to win for those teams.  With this information and what we know about matches, the final round score is always higher, we can start looking at the team that have a mean score that is closer to the max qualifying round scores.  Combine this with the scouting information that was collected at the regional event, and other information the team determines makes for a good alliance partner, a final choice can be made.  
 
 ### Verification
-There is not a great way to determine if the recommender is right.  So, I retrieved the actual alliances from the regional and use the data from the recommender to make the same recommendation score for the actual alliances.  The score column has the score the alliance achieves in the quarter final round and the record column contain the whether the team won or loosed the matches, a win equals a 1.  team with the higher probability of win fared better than the teams with lower probability of win scores.  From the mean scores chart we can determine there is a 23% lift in scores from the qualifying round to the quarter final round.  If we look at the standard deviation for each round, they are all consistent for the first three rounds so if we choose teams with scores that are higher, we can have more confidence in the recommendation when it is paired with its probability of winning. 
+There is not a great way to determine if the recommender is right.  So, I retrieved the actual alliances from the regional and use the data from the recommender to make the same recommendation score for the actual alliances. 
 
-![FIGURE 16: Alliance Cluster](images/allainceClustering.png)   
+![FIGURE 16: Alliance Results](images/quarterFinalScoresVerification.png)   
 
-To help verify and give another data point to the decision makers, I use a clustering algorithm to see how the team data grouped together. I used a neamShift version of a k-mean clustering.  I choose this because I did not need a number of clusters identified before I ran the algorithm, that was determined in the processing. Figure 16 is the clustering of the alliance recommended. If there was some conflict in getting an actual recommended alliance pairing because one of the preferred teams has been selected the color group could be used to select a substitute team. The color groups identify team with similar characteristics.  I also ran the meanshift against the team scores.
+The score column has the score the alliance achieves in the quarter final round and the record column contain the whether the team won or loosed the matches, a win equals a 1. The Alliances with the higher probability of win fared better than the teams with lower probability of win scores.  
 
-![FIGURE 17: Team Clustering](images/teamClustering.png)
+![FIGURE 17: Mean Scores](images/gameStatsVerification.png)  
+
+From the mean scores chart we can determine there is a 23% lift in scores from the qualifying round to the quarter final round.  If we look at the standard deviation for each round, they are all consistent for the first three rounds so if we choose teams with scores that are higher, we can have more confidence in the recommendation when it is paired with its probability of winning. 
+
+![FIGURE 18: Alliance Cluster](images/allainceClustering.png)   
+
+To help verify and give another data point to the decision makers, I use a clustering algorithm to see how the team data grouped together. I used a meanShift version of a k-mean clustering.  I chose this because I did not need a number of clusters identified before I ran the algorithm, that was determined in the processing. Figure 18 is the clustering of the alliance recommended. If there was some conflict in getting an actual recommended alliance pairing because one of the preferred teams has been selected the color group could be used to select a substitute team. The color groups identify team with similar characteristics.  I also ran the meanshift against the team scores.
+
+![FIGURE 19: Team Clustering](images/teamClustering.png)
 
 The results of this did not really provided any meaningful information. 
 
