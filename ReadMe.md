@@ -1,6 +1,9 @@
 # FRC Scouting Recommender
 # MSDS692 Data Science Practicum 1
 # J. Patrick Bernard
+## [Presentation Video](https://youtu.be/IInuMyIgIIA)
+### https://youtu.be/IInuMyIgIIA
+
 ## Description
 The purpose of this project is to build a recommender and classifier that a FIRST Robotics team, FIRST Robotic Competition (FRC) could use to select the best possible alliance partners for the final rounds. A secondary goal will be to build a curriculum that can be used to teach the high students what Data Science is and how they can use it without having in-depth knowledge of the math and techniques.
 
