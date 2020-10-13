@@ -5,7 +5,7 @@
 ### https://youtu.be/IInuMyIgIIA
 
 ## Description
-The purpose of this project is to build a recommender and classifier that a FIRST Robotics team, FIRST Robotic Competition (FRC) could use to select the best possible alliance partners for the final rounds. A secondary goal will be to build a curriculum that can be used to teach the high students what Data Science is and how they can use it without having in-depth knowledge of the math and techniques.
+The purpose of this project is to build a recommender and classifier that a [FIRST](https://www.firstinspires.org/robotics/frc) Robotics team, FIRST Robotic Competition (FRC) could use to select the best possible alliance partners for the final rounds. A secondary goal will be to build a curriculum that can be used to teach the high students what Data Science is and how they can use it without having in-depth knowledge of the math and techniques.
 
 During qualifying rounds teams are randomly grouped into two alliances of three teams each. At the end of qualifying, the top eight teams choose who their alliance partners will be. Match scores are recorded for each alliance.
 ## Hypothesis
